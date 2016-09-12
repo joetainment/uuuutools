@@ -29,7 +29,9 @@ public class UuuuRenderJobStandaloneScript : MonoBehaviour {
 	public string       keyboardLetterToStartRendering=".";
 	public string       keyboardLetterToStopRendering=",";
 	
-	
+
+	public int			sizeMultiplier = 1;
+
 	// The back end object that actually does the rendering for us
 	protected UuuuStandaloneRenderJob _renderJob;  // RenderJob here points to a class inside this class
 	
@@ -58,6 +60,7 @@ public class UuuuRenderJobStandaloneScript : MonoBehaviour {
 			nameLeaveBlankForTimeStamp=nameLeaveBlankForTimeStamp,
 			iniFramerate = framerate,
 			iniFramePadding = framePadding,
+			iniSizeMultiplier = sizeMultiplier,
 			ini=1
 		};
 
@@ -124,7 +127,8 @@ public class UuuuRenderJobStandaloneScript : MonoBehaviour {
 		public double  	iniTimeScale = 0.002;
 		public double 	iniLengthOfTimeToRender = 1.0;
 		public double 	iniFramerate = 24.0d;  // a near zero value will cause update to not render
-		public int		iniFramePadding = 4;	
+		public int		iniFramePadding = 4;
+		public int		iniSizeMultiplier = 1;
 
 		public string 	nameLeaveBlankForTimeStamp="";
 		public string   iniOutputPathNoExt="";  // this would override auto output path
@@ -137,6 +141,7 @@ public class UuuuRenderJobStandaloneScript : MonoBehaviour {
 		protected int _renderedFrameCount=0;
 		protected int _framePadding = 4;
 		protected double _lastRenderedTime=-1.0;
+		protected int _sizeMultiplier = 1;
 		
 		protected string _outputPathNoExt;
 		protected bool _useUnityCaptureRate;
@@ -161,6 +166,7 @@ public class UuuuRenderJobStandaloneScript : MonoBehaviour {
 			_startImmediately = iniStartImmediately;
 			_framerate = iniFramerate;
 			_framePadding = iniFramePadding;
+			_sizeMultiplier = iniSizeMultiplier;
 	
 			if (_outputPathNoExt == ""){
 				_outputPathNoExt = buildOutputPathNoExt();
@@ -234,7 +240,7 @@ public class UuuuRenderJobStandaloneScript : MonoBehaviour {
 			_lastRenderedTime = (double)Time.time;
 			
 			//Debug.Log( "Render a frame!" );
-			Application.CaptureScreenshot( outputPathThisFrame_ );
+			Application.CaptureScreenshot( outputPathThisFrame_, _sizeMultiplier );
 			_renderedFrameCount++;
 		}
 		
