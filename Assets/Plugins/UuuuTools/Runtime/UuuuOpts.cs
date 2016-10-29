@@ -84,21 +84,21 @@ public class UuuuOpts : Hashtable {
 	//// 	UuuuOpts uses s instead of set because we can't use set since
 	//// 	it's a keyword, thus we shorten it to s.  This also allows us to chain calls together
     public virtual UuuuOpts
-    s(string key_, object val_){
-		return this.set( key_, val_ );
+    S(string key_, object val_){
+		return this.Set( key_, val_ );
     }
     public virtual UuuuOpts
-    s(int key_, object val_){
-        return this.set( key_, val_ );
+    S(int key_, object val_){
+        return this.Set( key_, val_ );
     }
 
 	public UuuuOpts
-	set(string key_, object val_){
+	Set(string key_, object val_){
 		this[key_] = val_;
 		return this;
 	}
 	public UuuuOpts
-	set(int key_, object val_){
+	Set(int key_, object val_){
 		this[key_] = val_;
 		return this;
 	}
@@ -107,16 +107,16 @@ public class UuuuOpts : Hashtable {
 	////	Get generic data
 	////
 	public T
-	get<T>(string key_){
+	Get<T>(string key_){
 		return (T)this[key_];
 	}
 	public T
-	get<T>(int key_){
+	Get<T>(int key_){
 		return (T)this[key_];		
 	}
 	
 	public T
-	getWithDefaultFallback<T>( string key_, T defaultValue_ ){
+	GetWithDefaultFallback<T>( string key_, T defaultValue_ ){
 		if (  this.ContainsKey( key_ )  ) {
 			return (T)this[key_];
 		} else {
@@ -124,7 +124,7 @@ public class UuuuOpts : Hashtable {
 		}
 	}
 	public T
-	getWithDefaultFallback<T>( int key_, T defaultValue_ ){
+	GetWithDefaultFallback<T>( int key_, T defaultValue_ ){
 		if (  this.ContainsKey( key_ )  ) {
 			return (T)this[key_];
 		} else {
@@ -137,54 +137,54 @@ public class UuuuOpts : Hashtable {
 	////	Get commonly used standard C# data types
 	////
 	public bool
-	getBool( string key_ ){
+	GetBool( string key_ ){
 		return (bool)(this[ key_ ]);
 	}
 	public bool
-	getBool( int key_ ){
+	GetBool( int key_ ){
 		return (bool)(this[ key_ ]);
 	}
 	
 	public int
-	getInt( string key_ ){
+	GetInt( string key_ ){
 		return (int)(this[ key_ ]);
 	}
 	public int
-	getInt( int key_ ){
+	GetInt( int key_ ){
 		return (int)(this[ key_ ]);
 	}
 	
 	public double
-	getDouble( string key_ ){
+	GetDouble( string key_ ){
 		return (double)(this[ key_ ]);
 	}
 	public double
-	getDouble( int key_ ){
+	GetDouble( int key_ ){
 		return (double)(this[ key_ ]);
 	}
 	
 	public float
-	getFloat( string key_ ){
+	GetFloat( string key_ ){
 		return (float)(this[ key_ ]);
 	}
 	public float
-	getFloat( int key_ ){
+	GetFloat( int key_ ){
 		return (float)(this[ key_ ]);
 	}
 
 	//// This exists so that we can use boo's "single",
 	//// which is really the same as a float
 	public float
-	getSingle( string key_ ){
-		return this.getFloat( key_ );
+	GetSingle( string key_ ){
+		return this.GetFloat( key_ );
 	}
 
 	public string
-	getString( string key_ ){
+	GetString( string key_ ){
 		return (string)(this[ key_ ]);
 	}
 	public string
-	getString( int key_ ){
+	GetString( int key_ ){
 		return (string)(this[ key_ ]);
 	}
 
@@ -194,21 +194,19 @@ public class UuuuOpts : Hashtable {
 	////	Get commonly used Unity specific data types
 	////
 	public GameObject
-	getGameObject( string key_ ){
+	GetGameObject( string key_ ){
 		return this[ key_ ] as GameObject;
 	}
 	public GameObject
-	getGameObject( int key_ ){
+	GetGameObject( int key_ ){
 		return this[ key_ ] as GameObject;
 	}
 	public Texture
-	getTexture( string key_ ){
+	GetTexture( string key_ ){
 		return this[ key_ ] as Texture;
 	}
 	public Texture
-	getTexture( int key_ ){
+	GetTexture( int key_ ){
 		return this[ key_ ] as Texture;
 	}
-
-
 }

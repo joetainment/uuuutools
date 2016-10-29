@@ -2,6 +2,7 @@
 
 using UnityEngine;
 using UnityEditor;
+using UnityEditor.SceneManagement;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -29,7 +30,7 @@ public class UuuuEditorWindow : EditorWindow {
 	GetUuuuEditorWindow(){
 		if (_Window==null){
 			_Window = GetWindow<UuuuEditorWindow>();
-			_Window.title = Title;
+			_Window.titleContent = new GUIContent("Title");
 			//_Window.minSize = new Vector2( 200, 200 )
 		}
 		return _Window;
@@ -83,11 +84,11 @@ public class UuuuEditorWindow : EditorWindow {
 
 	public void
 	OnSelectionChange(){
-		UuuuEditorApp.A.selectionManager.onSelectionChange();
+		UuuuEditorApp.A.selectionManager.OnSelectionChange();
 	}
 
 	public void
-	show(){
+	Show(){
 		if (_Window==null) _Window.Show();
 	}
 }

@@ -16,6 +16,7 @@ same folder.
 
 using UnityEngine;
 using UnityEditor;
+using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -296,7 +297,7 @@ public class UuuuEditorObjExporter : ScriptableObject
                 mf[i] = (MeshFilter)mfList[i];
             }
             
-            string filename = EditorApplication.currentScene + "_" + exportedObjects;
+			string filename = SceneManager.GetActiveScene().name + "_" + exportedObjects;
         
             int stripIndex = filename.LastIndexOf('/');//FIXME: Should be Path.PathSeparator
             

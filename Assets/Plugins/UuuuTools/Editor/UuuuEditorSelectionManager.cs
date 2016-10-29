@@ -36,21 +36,21 @@ public class UuuuEditorSelectionManager {
 
 
 	public void
-	onSelectionChange( ){
+	OnSelectionChange( ){
 		dirty = true;
 		if ( ! UuuuEditorSettings.IsIgnoreUuuuTests) Debug.Log( "onSelectionChangeWasCalled!" );
-		processSelectionChange();
+		ProcessSelectionChange();
 	}
 
 	public void
-	update( ){
-		processSelectionChange();
+	Update( ){
+		ProcessSelectionChange();
 		dirty = false;
 	}
 
 
 	public void
-	processSelectionChange(){
+	ProcessSelectionChange(){
 
 
 		int[] ids_ = Selection.instanceIDs;
@@ -141,7 +141,7 @@ public class UuuuEditorSelectionManager {
 			//Debug.Log( "Selected transforms are:  " + debugStr_ );
 		}		
 		
-		UuuuEditorApp.A.setSelectionObjectsLengthFromLastUpdate( Selection.objects.Length );
+		UuuuEditorApp.A.SetSelectionObjectsLengthFromLastUpdate( Selection.objects.Length );
 
 		//Debug.Log( "selection processed!" );
 		//Debug.Log( Selection.objects.Length );

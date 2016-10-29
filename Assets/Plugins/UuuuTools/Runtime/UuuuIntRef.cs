@@ -1,9 +1,9 @@
 ﻿/// A simple wrapper class to use an integer number as a reference type
 
-public class UuuuInt {
+public class UuuuIntRef {
 	public int v;
 
-	public UuuuInt( int v_ ){
+	public UuuuIntRef( int v_ ){
 		v = v_;
 	}
 }

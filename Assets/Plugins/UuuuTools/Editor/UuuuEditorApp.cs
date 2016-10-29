@@ -2,6 +2,7 @@
 
 using UnityEngine;
 using UnityEditor;
+using UnityEditor.SceneManagement;
 using System.Collections;
 
 
@@ -17,23 +18,23 @@ public class UuuuEditorApp {
 	protected static UuuuEditorApp 		_A;
 	
 	public static void
-	Update(){
+	UpdateStaticCallback(){
 		if (_A!=null){
-			 _A.update();
+			 _A.UpdateCallback();
 			//Debug.Log( "Updated!" );
 		}
 		else {
 			_A = GetUuuuEditorAppInstance();
-			_A.update();
+			_A.UpdateCallback();
 			//Debug.Log( "Not Updated!" );
 		}
 	}
 
 	//// Static Public Methods	
 	public static void
-	FirstUpdate(){
-		A.firstUpdate();
-		EditorApplication.update -= FirstUpdate;
+	FirstUpdateStaticCallback(){
+		A.FirstUpdateCallback();
+		EditorApplication.update -= FirstUpdateStaticCallback;
 	}
 
 
@@ -41,11 +42,11 @@ public class UuuuEditorApp {
 	ReplaceUuuuEditorAppInstance(){
 		_A = new UuuuEditorApp();
 		
-		EditorApplication.update -= FirstUpdate;
-		EditorApplication.update += FirstUpdate;
+		EditorApplication.update -= FirstUpdateStaticCallback;
+		EditorApplication.update += FirstUpdateStaticCallback;
 		
-		EditorApplication.update -= Update;
-		EditorApplication.update += Update;
+		EditorApplication.update -= UpdateStaticCallback;
+		EditorApplication.update += UpdateStaticCallback;
 
 		//EditorApplication.update -= Update;
 		//EditorApplication.update += Update;
@@ -113,7 +114,7 @@ public class UuuuEditorApp {
 	////   Public Methods
 
 	public void
-	update(){
+	UpdateCallback(){
 		//if Editor.
 		if (UuuuEditorSettings.IsRealTimeUpdateEnabled==true){
 			string newSelectionIdStr_ = "UuuuSelectionInstanceIdsAsString";
@@ -125,40 +126,40 @@ public class UuuuEditorApp {
 			//Debug.Log( newSelectionIdStr_ );
 
 			if (newSelectionIdStr_ != selectionIdStringLast){
-				_selectionManager.update( );
+				_selectionManager.Update( );
 			}
 			selectionIdStringLast = newSelectionIdStr_;
 			
-			updateLast();
+			UpdateLast();
 		}
 
 	}
 
 	// //  Put anything here that needs to happen after everything else in update
 	public void
-	updateLast(){
+	UpdateLast(){
 		//Debug.Log(  _selectionObjectsLengthFromLastUpdate  );
 		_selectionObjectsLengthFromLastUpdate = Selection.objects.Length;
 	}
 	
 	public void
-	firstUpdate(){
+	FirstUpdateCallback(){
 		//Debug.Log( "UuuuEditor scripted plugin started." );
 
 		// We can do stuff here that should only occur on the first update!
 	}
 
 	public void
-	setSelectionObjectsLengthFromLastUpdate( int len_ ){
+	SetSelectionObjectsLengthFromLastUpdate( int len_ ){
 		_selectionObjectsLengthFromLastUpdate = len_;
 	}
 
 	public void
-	showWindow(){
+	ShowWindow(){
 		if (_Window==null){
 			_Window = UuuuEditorWindow.GetUuuuEditorWindow();
 		}
-		_Window.show();
+		_Window.Show();
 	}
 
 	// **** Idea, later on, try implementing something that uses this:

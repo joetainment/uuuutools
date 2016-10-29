@@ -216,7 +216,7 @@ public class UuuuEditorMenu : MonoBehaviour {
 	[  MenuItem("Window/UuuuTools Preferences...", false, 999520  )  ]
 	public static void
 	PreferencesWindowShow(){
-		UuuuEditorApp.A.showWindow();
+		UuuuEditorApp.A.ShowWindow();
 	}
 
 

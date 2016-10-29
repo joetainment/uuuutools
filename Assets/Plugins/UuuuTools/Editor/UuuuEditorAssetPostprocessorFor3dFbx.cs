@@ -55,8 +55,8 @@ public class UuuuEditorAssetPostprocessorFor3dFbx : AssetPostprocessor {
 		}
 		if (UuuuEditorSettings.IsProcessFixesDefaultNormalsAndTangents==true){	
 			importer_.normalSmoothingAngle = 180;
-			importer_.normalImportMode = ModelImporterTangentSpaceMode.Import;
-			importer_.tangentImportMode = ModelImporterTangentSpaceMode.Calculate;
+			importer_.importNormals = ModelImporterNormals.Import;
+			importer_.importTangents = ModelImporterTangents.CalculateMikk;
 			
 			importer_.importMaterials = true;
 			importer_.materialName = ModelImporterMaterialName.BasedOnMaterialName;
@@ -185,7 +185,7 @@ public class UuuuEditorAssetPostprocessorFor3dFbx : AssetPostprocessor {
 			////    this should make physics colliders, remove rendering components
 			////    and add physics materials based on the names of objects.
 			////    Do not be case sensitive!			
-			_addColliders(gobj.transform, importer_.assetPath );
+			_AddColliders(gobj.transform, importer_.assetPath );
 		}
 		
 		//// Commit and make changes visible in the UI
@@ -194,7 +194,7 @@ public class UuuuEditorAssetPostprocessorFor3dFbx : AssetPostprocessor {
 		          " If this is unwanted, please turn off asset processing in the UuuuTools window.");
     }
 
-    protected void _addColliders(Transform xform_, string pathAndName_ ) {
+    protected void _AddColliders(Transform xform_, string pathAndName_ ) {
 		//Debug.Log( "Found object named: " + xform_.name );
 		string xName_ = xform_.name.ToLower();
 		bool isUcx_ = xName_.StartsWith("ucx_");
@@ -207,10 +207,10 @@ public class UuuuEditorAssetPostprocessorFor3dFbx : AssetPostprocessor {
 			else if (isUcv_) mcol.convex = false;
 			
 			foreach (MeshRenderer m_ in xform_.gameObject.GetComponents<MeshRenderer>() ){
-				_destroyImmediate(m_);
+				_DestroyImmediate(m_);
             }
             foreach (MeshFilter m_ in xform_.gameObject.GetComponents<MeshFilter>()){
-                _destroyImmediate(m_);
+                _DestroyImmediate(m_);
             }
 			
 			//// If the UCX object found has any children, then they might be objects
@@ -263,7 +263,7 @@ public class UuuuEditorAssetPostprocessorFor3dFbx : AssetPostprocessor {
 						//// known physics materials, and won't get rid of other random nulls.
 						//// This is good!
 						if  (   child_.gameObject.GetComponents<Component>().Length<=1  && child_.childCount==0 ){
-								_destroyImmediate(child_.gameObject);
+								_DestroyImmediate(child_.gameObject);
 						}
 					}
 					
@@ -275,7 +275,7 @@ public class UuuuEditorAssetPostprocessorFor3dFbx : AssetPostprocessor {
 		
 		//// Recurse through any additional children, regardless of whether or not they are UCX or UCV
         foreach (Transform child_ in xform_){
-			_addColliders(child_, pathAndName_);
+			_AddColliders(child_, pathAndName_);
 		}
 	}
     
@@ -290,7 +290,7 @@ public class UuuuEditorAssetPostprocessorFor3dFbx : AssetPostprocessor {
     */
     
     
-	public void _destroyImmediate( Object obj_ ){
+	public void _DestroyImmediate( Object obj_ ){
 		Object.DestroyImmediate(obj_, true);
 	}
 }
